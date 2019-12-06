@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
@@ -35,7 +36,15 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'first-name' => 'required',
+            'last-name' => 'required',
+            'home_address' => 'required|min:5',
+            'email' => 'required|unique|email',
+            'phone_number' => 'required|numeric',
+            'home_number' => 'nullable|numeric',
+            'DOB' => 'required'
+        ]);
     }
 
     /**
